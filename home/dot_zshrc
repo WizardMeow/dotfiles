@@ -1,0 +1,25 @@
+[[ -r ~/.local/share/znap/znap.zsh ]] ||
+    git clone --depth 1 -- \
+        https://github.com/marlonrichert/zsh-snap.git ~/.local/share/znap
+source ~/.local/share/znap/znap.zsh
+
+znap eval starship 'starship init zsh --print-full-init'
+znap prompt
+
+znap source zsh-users/zsh-autosuggestions
+znap source zsh-users/zsh-syntax-highlighting
+znap source wfxr/forgit
+
+znap source sorin-ionescu/prezto modules/{environment,history}
+znap source ohmyzsh/ohmyzsh plugins/{git,asdf,z,extract}
+
+# pnpm
+export PNPM_HOME="/home/wizardmeow/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+alias proxy="export http_proxy=http://127.0.0.1:7890;export https_proxy=http://127.0.0.1:7890"
+alias unproxy="unset http_proxy;unset https_proxy"

@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+set -uo pipefail
+
+on-ERR() {
+  local status=$?
+  echo >&2 Error executing run_onchange_after_install-2-asdf-plugins.sh.tmpl
+  exit ${status}
+}
+
+trap on-ERR ERR
+
+if [[ "${CHEZMOI_VERBOSE:-}" == 1 ]]; then
+  echo 1: Install Asdf Plugins
+
+  if "${DEBUG_SCRIPTS:-false}"; then
+    set -x
+  fi
+fi
+
+asdf plugin add nodejs
