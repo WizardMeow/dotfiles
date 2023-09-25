@@ -1,0 +1,4 @@
+[".local/share/znap"]
+type = "git-repo"
+url = "https://github.com/marlonrichert/zsh-snap.git"
+refreshPeriod = "168h"

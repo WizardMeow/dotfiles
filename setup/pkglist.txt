@@ -1,5 +1,6 @@
 asdf-vm
 bitwarden
+bitwarden-cli
 chezmoi
 fcitx5-chinese-addons
 fcitx5-configtool
