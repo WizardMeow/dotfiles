@@ -1,0 +1,5 @@
+{{- if eq .preset "work" -}}
+{{-   template "gitconfig/work.tmpl" . -}}
+{{- else -}}
+{{-   template "gitconfig/home.tmpl" . -}}
+{{- end -}}
