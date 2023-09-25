@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+set -uo pipefail
+
+on-ERR() {
+  local status=$?
+  echo >&2 Error executing run_onchange_after_install-1-yay-packages.sh.tmpl
+  exit ${status}
+}
+
+trap on-ERR ERR
+
+if [[ "${CHEZMOI_VERBOSE:-}" == 1 ]]; then
+  echo 1: Install Yay Packages
+
+  if "${DEBUG_SCRIPTS:-false}"; then
+    set -x
+  fi
+fi
+
+declare -a flags
+flags=(--needed --noconfirm)
+
+if ! [[ "${CHEZMOI_VERBOSE:-}" == 1 ]]; then
+  flags+=(--quiet)
+fi
+
+# Brewfile: {{ include (joinPath .chezmoi.workingTree "setup/pkglist.txt") | sha256sum }}
+yay -S "${flags[@]}" - <"{{ .chezmoi.workingTree }}/setup/pkglist.txt"
