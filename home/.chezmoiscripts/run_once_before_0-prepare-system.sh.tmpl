@@ -23,7 +23,9 @@ ManjaroLinux)
   sudo sed -i 's/^# ParallelDownloads = 5/ParallelDownloads = 5/' /etc/pacman.conf
   sudo pacman-mirrors --geoip -s -q
   sudo pacman -Syu --noconfirm
-  sudo pacman -S yay git curl wget --noconfirm
+  sudo pacman -S  --noconfirm --needed - <"{{ .chezmoi.workingTree }}/setup/pkglist.build.txt"
+  
+  chsh -s $(which zsh)
   ;;
 
 *) : ;;
