@@ -1,0 +1,8 @@
+sudo -i
+bash 
+export url='https://fastly.jsdelivr.net/gh/juewuy/ShellClash@master' && wget -q --no-check-certificate -O /tmp/install.sh $url/install.sh  && bash /tmp/install.sh && source /etc/profile &> /dev/null
+
+alias clash="bash /usr/share/clash/clash.sh"
+export clashdir="/usr/share/clash"
+alias proxy="export http_proxy=http://127.0.0.1:7890;export https_proxy=http://127.0.0.1:7890"
+alias unproxy="unset http_proxy;unset https_proxy"
