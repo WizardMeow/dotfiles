@@ -10,6 +10,10 @@ znap source wfxr/forgit
 znap source sorin-ionescu/prezto modules/{environment,history}
 znap source ohmyzsh/ohmyzsh plugins/{git,asdf,z,extract}
 
+# lang
+export LANG=zh_CN.UTF-8
+export LANGUAGE=zh_CN:en_US
+
 # pnpm
 export PNPM_HOME="/home/wizardmeow/.local/share/pnpm"
 case ":$PATH:" in
