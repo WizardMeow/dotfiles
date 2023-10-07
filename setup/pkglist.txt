@@ -2,6 +2,7 @@ asdf-vm
 bitwarden
 bitwarden-cli
 chezmoi
+eza
 fcitx5-chinese-addons
 fcitx5-configtool
 fcitx5-input-support
@@ -16,7 +17,6 @@ openssh
 p7zip
 postman-bin
 spotify
-starship
 sudo
 tldr
 tree
@@ -30,3 +30,4 @@ xclip
 yay
 zip
 zsh
+zsh-antidote
