@@ -8,7 +8,6 @@ export EDITOR=$HOME/.bin/editor
 export VISUAL=$HOME/.bin/editor
 export LANG=zh_CN.UTF-8
 export LANGUAGE=zh_CN:en_US
-export LC_COLLATE=en_US.UTF-8
 
 export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 export ZSH_AUTOSUGGEST_USE_ASYNC=1
