@@ -13,6 +13,7 @@ google-chrome
 gvim
 htop
 krunner-vscodeprojects-git
+plasma5-runners-jetbrains-runner
 openssh
 p7zip
 postman-bin
