@@ -23,9 +23,17 @@ ManjaroLinux)
   sudo sed -i 's/^# ParallelDownloads = 5/ParallelDownloads = 5/' /etc/pacman.conf
   sudo pacman-mirrors --geoip -s -q
   sudo pacman -Syu --noconfirm
-  sudo pacman -S  --noconfirm --needed - <"{{ .chezmoi.workingTree }}/setup/manjaro/pkglist.build.txt"
+  sudo pacman -S  --noconfirm --needed - < "{{ .chezmoi.workingTree }}/setup/manjaro/pkglist.build.txt"
   
-  chsh -s $(which zsh)
+  chsh -s "$(which zsh)"
+  ;;
+Ubuntu)
+  sudo cp "{{ .chezmoi.workingTree }}/setup/ubuntu/sources.list" /etc/apt/sources.list
+  sudo apt update -q -o=Dpkg::Use-Pty=0
+  sudo apt upgrade -y -q -o=Dpkg::Use-Pty=0
+  xargs sudo apt install -y -q -o=Dpkg::Use-Pty=0 < "{{ .chezmoi.workingTree }}/setup/ubuntu/pkglist.build.txt"
+  
+  chsh -s "$(which zsh)"
   ;;
 
 *) : ;;
