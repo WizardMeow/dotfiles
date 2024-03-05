@@ -26,4 +26,4 @@ if ! [[ "${CHEZMOI_VERBOSE:-}" == 1 ]]; then
 fi
 
 # Brewfile: {{ include (joinPath .chezmoi.workingTree "setup/pkglist.txt") | sha256sum }}
-yay -S "${flags[@]}" - <"{{ .chezmoi.workingTree }}/setup/pkglist.txt"
+yay -S "${flags[@]}" - <"{{ .chezmoi.workingTree }}/setup/manjaro/pkglist.txt"
