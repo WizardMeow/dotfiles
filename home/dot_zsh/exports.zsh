@@ -2,6 +2,9 @@
 if [[ -d "$HOME/.local/bin/" ]]; then
 	export PATH="$PATH:$HOME/.local/bin/"
 fi
+if [[ -d "/snap/bin/" ]]; then
+	export PATH="$PATH:/snap/bin"
+fi
 
 # general exports
 export EDITOR=$HOME/.bin/editor
