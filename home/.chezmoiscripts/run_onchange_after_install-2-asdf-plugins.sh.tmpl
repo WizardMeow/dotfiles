@@ -19,6 +19,11 @@ if [[ "${CHEZMOI_VERBOSE:-}" == 1 ]]; then
 fi
 
 asdf update
+asdf plugin update --all
+
 asdf plugin add nodejs
 asdf install nodejs 18.16.0
 asdf install nodejs 16.16.0
+
+asdf plugin add pnpm
+asdf install pnpm  8.15.4
