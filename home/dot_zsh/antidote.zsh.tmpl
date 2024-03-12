@@ -1,5 +1,5 @@
 zstyle ':antidote:bundle' use-friendly-names 'yes'
-{{ if eq .chezmoi.osRelease.idLike "arch"}}
+{{ if eq .chezmoi.osRelease.id "manjaro"}}
 source '/usr/share/zsh-antidote/antidote.zsh'
 {{ else }}
 source ~/.antidote/antidote.zsh

@@ -18,7 +18,7 @@ if [[ "${CHEZMOI_VERBOSE:-}" == 1 ]]; then
   fi
 fi
 
-{{ if not ( eq .chezmoi.osRelease.idLike "arch" )}}
+{{ if not ( eq .chezmoi.osRelease.id "manjaro" )}}
 asdf update
 {{ end }}
 asdf plugin update --all
