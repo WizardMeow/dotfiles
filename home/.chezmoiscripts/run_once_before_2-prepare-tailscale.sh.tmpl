@@ -1,0 +1,8 @@
+#!/bin/bash
+
+{{ if eq .tailscale true }}
+if ! command -v tailscale &>/dev/null; then
+  echo "tailscale not found, installing..."
+  curl -fsSL https://tailscale.com/install.sh | sh
+fi
+{{ end }}
