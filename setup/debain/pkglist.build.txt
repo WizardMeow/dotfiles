@@ -1,0 +1,6 @@
+curl
+git
+git-lfs
+wget
+zsh
+snapd

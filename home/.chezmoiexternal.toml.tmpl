@@ -1,0 +1,21 @@
+[".local/share/znap"]
+type = "git-repo"
+url = "https://github.com/marlonrichert/zsh-snap.git"
+refreshPeriod = "168h"
+
+{{ if not ( eq .chezmoi.osRelease.idLike "arch" )}}
+[".local/bin/eza"]
+type = "archive-file"
+url = "https://github.com/eza-community/eza/releases/latest/download/eza_x86_64-unknown-linux-gnu.tar.gz"
+path = "eza"
+refreshPeriod = "168h"
+stripComponents = 1
+[".antidote"]
+type = "git-repo"
+url = "https://github.com/mattmc3/antidote.git"
+refreshPeriod = "168h"
+[".asdf"]
+type = "git-repo"
+url = "https://github.com/asdf-vm/asdf.git"
+refreshPeriod = "0"
+{{ end }}
