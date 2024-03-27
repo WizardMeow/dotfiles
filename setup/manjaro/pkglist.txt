@@ -13,9 +13,10 @@ google-chrome
 gvim
 htop
 krunner-vscodeprojects
-plasma5-runners-jetbrains-runner
+lazygit
 openssh
 p7zip
+plasma5-runners-jetbrains-runner
 postman-bin
 spotify
 sudo
