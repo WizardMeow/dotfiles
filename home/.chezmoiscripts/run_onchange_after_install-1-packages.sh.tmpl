@@ -20,6 +20,11 @@ fi
 # Brewfile: {{ include (joinPath .chezmoi.workingTree "setup/manjaro/pkglist.txt") | sha256sum }}
 yay -S --needed --noconfirm --quiet - <"{{ .chezmoi.workingTree }}/setup/manjaro/pkglist.txt"
 
+{{ else if eq .chezmoi.osRelease.id "archarm" }}
+# Brewfile: {{ include (joinPath .chezmoi.workingTree "setup/archarm/pkglist.txt") | sha256sum }}
+yay -S --needed --noconfirm --quiet - <"{{ .chezmoi.workingTree }}/setup/archarm/pkglist.txt"
+
+
 {{ else if eq .chezmoi.osRelease.id "ubuntu" }}
 ## apt
 sudo apt update -q -o=Dpkg::Use-Pty=0

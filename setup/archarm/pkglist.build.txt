@@ -1,0 +1,11 @@
+base-devel
+cmake
+curl
+git
+git-lfs
+libseccomp
+libtool
+python-pip
+wget
+zsh
+vi
