@@ -24,6 +24,15 @@ sudo pacman-mirrors --geoip -s -q
 sudo pacman -Syu --noconfirm
 sudo pacman -S  --noconfirm --needed - < "{{ .chezmoi.workingTree }}/setup/manjaro/pkglist.build.txt"
 
+{{ else if eq .chezmoi.osRelease.id "archarm" }}
+sudo tee /etc/pacman.d/mirrorlist > /dev/null <<EOT
+Server = https://mirrors.aliyun.com/archlinuxarm/\$arch/\$repo
+Server = https://mirrors.tuna.tsinghua.edu.cn/archlinuxarm/\$arch/\$repo
+EOT
+sudo pacman -Syu --noconfirm
+sudo pacman -S  --noconfirm --needed - < "{{ .chezmoi.workingTree }}/setup/archarm/pkglist.build.txt"
+git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -sri --noconfirm && cd ..
+
 {{ else if eq .chezmoi.osRelease.id "ubuntu" }}
 sudo cp "{{ .chezmoi.workingTree }}/setup/ubuntu/sources.list" /etc/apt/sources.list
 sudo apt update -q -o=Dpkg::Use-Pty=0

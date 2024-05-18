@@ -18,9 +18,9 @@ if [[ "${CHEZMOI_VERBOSE:-}" == 1 ]]; then
   fi
 fi
 
-{{ if not ( eq .chezmoi.osRelease.id "manjaro" )}}
-asdf update
-{{ end }}
+source ~/.zshrc
+
+asdf update || true
 asdf plugin update --all
 
 asdf plugin add nodejs
