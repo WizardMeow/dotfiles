@@ -5,7 +5,7 @@ eza
 fcitx5-chinese-addons
 fcitx5-configtool
 fcitx5-input-support
-fcitx5-material-color
+fcitx5-rime
 feishu-bin
 fzf
 chromium
@@ -15,6 +15,7 @@ lazygit
 openssh
 p7zip
 plasma5-runners-jetbrains-runner
+rime-ice-git
 sudo
 tldr
 tree
