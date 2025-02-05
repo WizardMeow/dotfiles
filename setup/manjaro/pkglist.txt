@@ -17,7 +17,7 @@ lazygit
 openssh
 p7zip
 plasma5-runners-jetbrains-runner
-postman-bin
+rime-ice-git
 spotify
 sudo
 tldr
