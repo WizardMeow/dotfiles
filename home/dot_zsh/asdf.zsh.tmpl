@@ -1,0 +1,5 @@
+{{ if eq .chezmoi.osRelease.idLike "arch"}}
+# noop
+{{ else }}
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+{{ end }}
