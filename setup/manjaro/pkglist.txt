@@ -14,6 +14,7 @@ gvim
 htop
 krunner-vscodeprojects
 lazygit
+libfido2
 openssh
 p7zip
 plasma5-runners-jetbrains-runner
