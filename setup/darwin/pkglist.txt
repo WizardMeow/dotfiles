@@ -1,0 +1,14 @@
+asdf
+bitwarden
+chezmoi
+eza
+fzf
+lazygit
+openssh
+tldr
+tree
+font-jetbrains-mono
+font-sarasa-gothic
+visual-studio-code
+vlc
+antidote

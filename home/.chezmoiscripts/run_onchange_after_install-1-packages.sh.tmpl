@@ -16,14 +16,17 @@ if [[ "${CHEZMOI_VERBOSE:-}" == 1 ]]; then
   fi
 fi
 
-{{ if eq .chezmoi.osRelease.id "manjaro" }}
+
+{{ if eq .chezmoi.os "darwin" }}  
+## brew
+brew update
+brew upgrade
+## Brewfile: {{ include (joinPath .chezmoi.workingTree "setup/darwin/pkglist.txt") | sha256sum }}
+xargs brew install < "{{ .chezmoi.workingTree }}/setup/darwin/pkglist.txt"
+
+{{ else if eq .chezmoi.osRelease.id "manjaro" }}
 # Brewfile: {{ include (joinPath .chezmoi.workingTree "setup/manjaro/pkglist.txt") | sha256sum }}
 yay -S --needed --noconfirm --quiet - <"{{ .chezmoi.workingTree }}/setup/manjaro/pkglist.txt"
-
-{{ else if eq .chezmoi.osRelease.id "archarm" }}
-# Brewfile: {{ include (joinPath .chezmoi.workingTree "setup/archarm/pkglist.txt") | sha256sum }}
-yay -S --needed --noconfirm --quiet - <"{{ .chezmoi.workingTree }}/setup/archarm/pkglist.txt"
-
 
 {{ else if eq .chezmoi.osRelease.id "ubuntu" }}
 ## apt
@@ -38,6 +41,7 @@ sudo apt update -q -o=Dpkg::Use-Pty=0
 sudo apt upgrade -y -q -o=Dpkg::Use-Pty=0
 ## Brewfile: {{ include (joinPath .chezmoi.workingTree "setup/debain/pkglist.list") | sha256sum }}
 xargs sudo apt install -y -q -o=Dpkg::Use-Pty=0 < "{{ .chezmoi.workingTree }}/setup/debain/pkglist.list"
+
 {{end}}
 
 

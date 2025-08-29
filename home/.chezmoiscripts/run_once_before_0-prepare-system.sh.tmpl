@@ -18,20 +18,16 @@ if [[ "${CHEZMOI_VERBOSE:-}" == 1 ]]; then
   fi
 fi
 
-{{ if eq .chezmoi.osRelease.id "manjaro" }}
+{{ if eq .chezmoi.os "darwin" }}  
+brew update
+brew upgrade
+xargs brew install < "{{ .chezmoi.workingTree }}/setup/darwin/pkglist.build.txt"
+
+{{ else if eq .chezmoi.osRelease.id "manjaro" }}
 sudo sed -i 's/^# ParallelDownloads = 5/ParallelDownloads = 5/' /etc/pacman.conf
 sudo pacman-mirrors --geoip -s -q
 sudo pacman -Syu --noconfirm
 sudo pacman -S  --noconfirm --needed - < "{{ .chezmoi.workingTree }}/setup/manjaro/pkglist.build.txt"
-
-{{ else if eq .chezmoi.osRelease.id "archarm" }}
-sudo tee /etc/pacman.d/mirrorlist > /dev/null <<EOT
-Server = https://mirrors.aliyun.com/archlinuxarm/\$arch/\$repo
-Server = https://mirrors.tuna.tsinghua.edu.cn/archlinuxarm/\$arch/\$repo
-EOT
-sudo pacman -Syu --noconfirm
-sudo pacman -S  --noconfirm --needed - < "{{ .chezmoi.workingTree }}/setup/archarm/pkglist.build.txt"
-git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -sri --noconfirm && cd ..
 
 {{ else if eq .chezmoi.osRelease.id "ubuntu" }}
 sudo cp "{{ .chezmoi.workingTree }}/setup/ubuntu/sources.list" /etc/apt/sources.list
@@ -43,5 +39,6 @@ xargs sudo apt install -y -q -o=Dpkg::Use-Pty=0 < "{{ .chezmoi.workingTree }}/se
 sudo apt update -q -o=Dpkg::Use-Pty=0
 sudo apt upgrade -y -q -o=Dpkg::Use-Pty=0
 xargs sudo apt install -y -q -o=Dpkg::Use-Pty=0 < "{{ .chezmoi.workingTree }}/setup/debain/pkglist.build.txt"
+
 {{ end }}
 chsh -s "$(which zsh)"

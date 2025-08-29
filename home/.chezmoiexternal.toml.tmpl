@@ -3,7 +3,9 @@ type = "git-repo"
 url = "https://github.com/marlonrichert/zsh-snap.git"
 refreshPeriod = "168h"
 
-{{ if not ( eq .chezmoi.osRelease.idLike "arch" )}}
+{{ if eq .chezmoi.os "darwin" }}  
+{{ else if eq .chezmoi.osRelease.id "manjaro" }}
+{{ else }}
 [".local/bin/eza"]
 type = "archive-file"
 url = "https://github.com/eza-community/eza/releases/latest/download/eza_x86_64-unknown-linux-gnu.tar.gz"
