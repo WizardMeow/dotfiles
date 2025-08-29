@@ -1,5 +1,4 @@
 asdf
-bitwarden
 chezmoi
 eza
 fzf
@@ -9,7 +8,10 @@ tldr
 tree
 font-jetbrains-mono
 font-sarasa-gothic
+font-meslo-for-powerlevel10k
 visual-studio-code
 vlc
 antidote
 webstorm
+tailscale
+tailscale-app
