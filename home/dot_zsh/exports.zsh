@@ -15,6 +15,7 @@ export LANGUAGE=zh_CN:en_US
 export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 export ZSH_AUTOSUGGEST_USE_ASYNC=1
 export ZSH_AUTOSUGGEST_MANUAL_REBIND=1
+export ZSH_CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/ohmyzsh"
 
 # pnpm
 export PNPM_HOME="$HOME/.local/share/pnpm"
