@@ -19,7 +19,6 @@ openssh
 p7zip
 plasma5-runners-jetbrains-runner
 rime-ice-git
-spotify
 sudo
 tldr
 tree
