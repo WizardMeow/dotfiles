@@ -1,0 +1,5 @@
+curl
+libtool
+wget
+coreutils
+git
