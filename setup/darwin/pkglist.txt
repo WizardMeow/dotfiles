@@ -12,3 +12,4 @@ font-sarasa-gothic
 visual-studio-code
 vlc
 antidote
+webstorm
