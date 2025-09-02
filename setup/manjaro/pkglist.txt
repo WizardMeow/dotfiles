@@ -1,6 +1,4 @@
 asdf-vm
-bitwarden
-bitwarden-cli
 chezmoi
 eza
 fcitx5-chinese-addons
@@ -17,7 +15,7 @@ lazygit
 libfido2
 openssh
 p7zip
-plasma5-runners-jetbrains-runner
+plasma6-runners-jetbrains-runner-git
 rime-ice-git
 sudo
 tldr
