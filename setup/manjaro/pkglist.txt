@@ -24,6 +24,7 @@ ttf-jetbrains-mono
 ttf-sarasa-gothic
 visual-studio-code-bin
 vlc
+vlc-plugins-all
 wget
 which
 xclip
