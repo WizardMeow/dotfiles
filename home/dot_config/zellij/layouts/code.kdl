@@ -1,0 +1,19 @@
+layout {
+  // 左半屏：TraeCli 全高
+  pane size="50%" name="traecli" {
+    command "traecli"
+  }
+
+  // 右半屏：再竖直分成上下两块
+  pane size="50%" split_direction="vertical" {
+    // 右上：lazygit
+    pane name="lazygit" {
+      command "lazygit"
+    }
+
+    // 右下：用户 shell
+    pane name="shell" {
+      command "zsh"
+    }
+  }
+}
