@@ -1,0 +1,34 @@
+layout {
+  pane split_direction="vertical" {
+    // 左半屏：Codex 全高
+    pane size="55%" name="codex" {
+      command "codex"
+      close_on_exit false
+    }
+
+    // 右半屏：再水平分成上下两块
+    pane size="45%" split_direction="horizontal" {
+      // 右上：lazygit
+      pane name="lazygit" {
+        command "lazygit"
+        close_on_exit false
+      }
+
+      // 右下：用户 shell
+      pane name="shell" {
+        command "zsh"
+        close_on_exit false
+      }
+    }
+  }
+}
+
+keybinds clear-defaults=true {
+  shared {
+    bind "Ctrl q" { Quit; }
+  }
+}
+ 
+default_mode "locked"
+mouse_hover_effects false
+advanced_mouse_actions false
