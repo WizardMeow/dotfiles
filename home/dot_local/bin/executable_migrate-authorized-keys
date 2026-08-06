@@ -6,11 +6,6 @@ target_dir="$HOME/.ssh/authorized_keys.d"
 target_keys="$target_dir/chezmoi"
 sshd_config=/etc/ssh/sshd_config
 
-if [ ! -f "$source_keys" ]; then
-  echo "source file does not exist: $source_keys" >&2
-  exit 1
-fi
-
 mkdir -p "$target_dir"
 chmod 700 "$HOME/.ssh" "$target_dir"
 
@@ -21,20 +16,26 @@ cleanup() {
 }
 trap cleanup EXIT
 
-grep -E '(^|[[:space:]])ssh:master[[:space:]]*$' "$source_keys" > "$tmp_target" || true
-if [ ! -s "$tmp_target" ]; then
-  echo "no ssh:master key found in $source_keys" >&2
-  exit 1
+if grep -qE '(^|[[:space:]])ssh:master[[:space:]]*$' "$target_keys" 2>/dev/null; then
+  echo "sync key is already in $target_keys"
+else
+  if [ ! -f "$source_keys" ]; then
+    echo "source file does not exist: $source_keys" >&2
+    exit 1
+  fi
+  grep -E '(^|[[:space:]])ssh:master[[:space:]]*$' "$source_keys" > "$tmp_target" || true
+  if [ ! -s "$tmp_target" ]; then
+    echo "no ssh:master key found in $source_keys or $target_keys" >&2
+    exit 1
+  fi
+  grep -vE '(^|[[:space:]])ssh:master[[:space:]]*$' "$source_keys" > "$tmp_source" || true
+  cp "$source_keys" "$source_keys.bak.$(date +%Y%m%d%H%M%S)"
+  cat "$tmp_target" > "$target_keys"
+  cat "$tmp_source" > "$source_keys"
+  chmod 600 "$source_keys"
+  echo "migrated sync key to $target_keys"
 fi
-
-grep -vE '(^|[[:space:]])ssh:master[[:space:]]*$' "$source_keys" > "$tmp_source" || true
-cp "$source_keys" "$source_keys.bak.$(date +%Y%m%d%H%M%S)"
-cat "$tmp_target" > "$target_keys"
-cat "$tmp_source" > "$source_keys"
-chmod 600 "$source_keys" "$target_keys"
-
-echo "migrated sync key to $target_keys"
-echo "backup: $source_keys.bak.*"
+chmod 600 "$target_keys"
 echo
 echo "The SSH daemon must read both files:"
 echo "  AuthorizedKeysFile .ssh/authorized_keys .ssh/authorized_keys.d/chezmoi"
