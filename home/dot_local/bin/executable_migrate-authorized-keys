@@ -48,11 +48,11 @@ fi
 
 authorized_keys_file='AuthorizedKeysFile .ssh/authorized_keys .ssh/authorized_keys.d/chezmoi'
 if grep -Eq '^[[:space:]]*AuthorizedKeysFile[[:space:]]' "$sshd_config"; then
-  doas sed -i -E "s|^[[:space:]]*AuthorizedKeysFile[[:space:]].*$|$authorized_keys_file|" "$sshd_config"
+  sudo sed -i -E "s|^[[:space:]]*AuthorizedKeysFile[[:space:]].*$|$authorized_keys_file|" "$sshd_config"
 else
-  doas /bin/sh -c 'printf "\\n%s\\n" "$1" >> "$2"' sh "$authorized_keys_file" "$sshd_config"
+  sudo /bin/sh -c 'printf "\\n%s\\n" "$1" >> "$2"' sh "$authorized_keys_file" "$sshd_config"
 fi
 
-doas sshd -t
-doas systemctl reload sshd 2>/dev/null || doas service ssh reload
+sudo sshd -t
+sudo systemctl reload sshd 2>/dev/null || sudo service ssh reload
 echo "sshd configured and reloaded"
