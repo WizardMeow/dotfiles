@@ -35,4 +35,6 @@ alias s="sudo"
 alias proxy="export http_proxy=http://127.0.0.1:7890;export https_proxy=http://127.0.0.1:7890"
 alias unproxy="unset http_proxy;unset https_proxy"
 
-alias emf="emox eslint --fix $(git diff --name-only HEAD | xargs)"
+emf() {
+    emox eslint --fix $(git diff --name-only HEAD | xargs)
+}
