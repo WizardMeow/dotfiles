@@ -1,0 +1,5 @@
+#!/bin/bash
+set -eu
+
+cache_root="${XDG_CACHE_HOME:-$HOME/.cache}"
+rm -rf "$cache_root/antidote" "$cache_root/ohmyzsh"
