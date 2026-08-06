@@ -6,4 +6,8 @@ source '/usr/share/zsh-antidote/antidote.zsh'
 {{ else }}
 source ~/.antidote/antidote.zsh
 {{ end }}
+
+autoload -Uz compinit
+compinit
+
 antidote load $HOME/.zsh/plugins.txt

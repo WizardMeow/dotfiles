@@ -19,4 +19,10 @@ if [ -f $HOME/.zsh/local.zsh ]; then
     source $HOME/.zsh/local.zsh
 fi
 
+if [[ -t 0 && -t 1 ]]; then
+    setopt monitor 2>/dev/null || true
+else
+    typeset -g POWERLEVEL9K_DISABLE_GITSTATUS=true
+fi
+
 source $HOME/.p10k.zsh
