@@ -1,0 +1,23 @@
+#!/bin/bash
+set -eu
+
+sshd_config=/etc/ssh/sshd_config
+authorized_keys_file='AuthorizedKeysFile .ssh/authorized_keys .ssh/authorized_keys.d/chezmoi'
+chezmoi_keys="$HOME/.ssh/authorized_keys.d/chezmoi"
+local_keys="$HOME/.ssh/authorized_keys"
+
+if [ -f "$chezmoi_keys" ] && [ -f "$local_keys" ]; then
+  tmp_keys=$(mktemp)
+  grep -vFf "$chezmoi_keys" "$local_keys" > "$tmp_keys" || true
+  chmod 600 "$tmp_keys"
+  mv "$tmp_keys" "$local_keys"
+fi
+
+if grep -Eq '^[[:space:]]*AuthorizedKeysFile[[:space:]]' "$sshd_config"; then
+  doas sed -i -E "s|^[[:space:]]*AuthorizedKeysFile[[:space:]].*$|$authorized_keys_file|" "$sshd_config"
+else
+  printf '\n%s\n' "$authorized_keys_file" | doas tee -a "$sshd_config" >/dev/null
+fi
+
+doas sshd -t
+doas systemctl reload sshd 2>/dev/null || doas service ssh reload
