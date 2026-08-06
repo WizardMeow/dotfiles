@@ -1,0 +1,57 @@
+#!/bin/bash
+set -eu
+
+source_keys="$HOME/.ssh/authorized_keys"
+target_dir="$HOME/.ssh/authorized_keys.d"
+target_keys="$target_dir/chezmoi"
+sshd_config=/etc/ssh/sshd_config
+
+if [ ! -f "$source_keys" ]; then
+  echo "source file does not exist: $source_keys" >&2
+  exit 1
+fi
+
+mkdir -p "$target_dir"
+chmod 700 "$HOME/.ssh" "$target_dir"
+
+tmp_source=$(mktemp)
+tmp_target=$(mktemp)
+cleanup() {
+  rm -f "$tmp_source" "$tmp_target"
+}
+trap cleanup EXIT
+
+grep -E '(^|[[:space:]])ssh:master[[:space:]]*$' "$source_keys" > "$tmp_target" || true
+if [ ! -s "$tmp_target" ]; then
+  echo "no ssh:master key found in $source_keys" >&2
+  exit 1
+fi
+
+grep -vE '(^|[[:space:]])ssh:master[[:space:]]*$' "$source_keys" > "$tmp_source" || true
+cp "$source_keys" "$source_keys.bak.$(date +%Y%m%d%H%M%S)"
+cat "$tmp_target" > "$target_keys"
+cat "$tmp_source" > "$source_keys"
+chmod 600 "$source_keys" "$target_keys"
+
+echo "migrated sync key to $target_keys"
+echo "backup: $source_keys.bak.*"
+echo
+echo "The SSH daemon must read both files:"
+echo "  AuthorizedKeysFile .ssh/authorized_keys .ssh/authorized_keys.d/chezmoi"
+echo
+read -r -p "Configure and reload sshd now? [y/N] " answer
+if [[ "$answer" != "y" && "$answer" != "Y" ]]; then
+  echo "authorized_keys migration complete; sshd was not changed"
+  exit 0
+fi
+
+authorized_keys_file='AuthorizedKeysFile .ssh/authorized_keys .ssh/authorized_keys.d/chezmoi'
+if grep -Eq '^[[:space:]]*AuthorizedKeysFile[[:space:]]' "$sshd_config"; then
+  doas sed -i -E "s|^[[:space:]]*AuthorizedKeysFile[[:space:]].*$|$authorized_keys_file|" "$sshd_config"
+else
+  doas /bin/sh -c 'printf "\\n%s\\n" "$1" >> "$2"' sh "$authorized_keys_file" "$sshd_config"
+fi
+
+doas sshd -t
+doas systemctl reload sshd 2>/dev/null || doas service ssh reload
+echo "sshd configured and reloaded"
