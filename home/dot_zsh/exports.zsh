@@ -1,6 +1,9 @@
 # path
-if [[ -d "$HOME/.local/bin/" ]]; then
-	export PATH="$PATH:$HOME/.local/bin/"
+if [[ -d "$HOME/.local/bin" ]]; then
+	case ":$PATH:" in
+	  *":$HOME/.local/bin:"*) ;;
+	  *) export PATH="$HOME/.local/bin:$PATH" ;;
+	esac
 fi
 if [[ -d "/snap/bin/" ]]; then
 	export PATH="$PATH:/snap/bin"
