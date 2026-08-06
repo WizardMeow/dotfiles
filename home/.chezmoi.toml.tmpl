@@ -1,7 +1,15 @@
+{{- $tailscale := true -}}
+{{- if hasKey . "tailscale" -}}
+{{- $tailscale = get . "tailscale" -}}
+{{- end -}}
+{{- $headless := false -}}
+{{- if hasKey . "headless" -}}
+{{- $headless = get . "headless" -}}
+{{- end -}}
 [data]
     username = "WizardMeow"
     email = "goldenkingppp@gmail.com"
     github_username = "WizardMeow"
     
-    tailscale = true
-    headless = false
+    tailscale = {{ $tailscale }}
+    headless = {{ $headless }}
