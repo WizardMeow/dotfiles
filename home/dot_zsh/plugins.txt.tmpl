@@ -1,6 +1,8 @@
 belak/zsh-utils path:completion
 
+{{ if not .headless -}}
 ohmyzsh/ohmyzsh path:lib/clipboard.zsh
+{{ end -}}
 ohmyzsh/ohmyzsh path:lib/completion.zsh
 ohmyzsh/ohmyzsh path:lib/directories.zsh
 ohmyzsh/ohmyzsh path:lib/history.zsh
@@ -13,6 +15,10 @@ ohmyzsh/ohmyzsh path:plugins/extract
 
 romkatv/powerlevel10k
 zsh-users/zsh-completions
+{{ if not .headless -}}
 zsh-users/zsh-autosuggestions
+{{ end -}}
 zsh-users/zsh-history-substring-search
+{{ if not .headless -}}
 zsh-users/zsh-syntax-highlighting
+{{ end -}}
