@@ -23,6 +23,8 @@ brew update
 brew upgrade
 ## Brewfile: {{ include (joinPath .chezmoi.workingTree "setup/darwin/pkglist.txt") | sha256sum }}
 xargs brew install < "{{ .chezmoi.workingTree }}/setup/darwin/pkglist.txt"
+## Caskfile: {{ include (joinPath .chezmoi.workingTree "setup/darwin/casklist.txt") | sha256sum }}
+xargs brew install --cask < "{{ .chezmoi.workingTree }}/setup/darwin/casklist.txt"
 
 {{ else if eq .chezmoi.osRelease.id "manjaro" }}
 # Brewfile: {{ include (joinPath .chezmoi.workingTree "setup/manjaro/pkglist.txt") | sha256sum }}
@@ -42,4 +44,3 @@ sudo apt update -q -o=Dpkg::Use-Pty=0
 xargs sudo apt install -y -q -o=Dpkg::Use-Pty=0 < "{{ .chezmoi.workingTree }}/setup/debain/pkglist.list"
 
 {{end}}
-

@@ -2,10 +2,15 @@ asdf
 chezmoi
 eza
 fzf
+git-lfs
 lazygit
 openssh
+p7zip
+ripgrep
+rsync
 tldr
 tree
+zellij
 font-jetbrains-mono
 font-sarasa-gothic
 font-meslo-for-powerlevel10k
