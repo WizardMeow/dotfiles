@@ -1,0 +1,17 @@
+#!/bin/sh
+
+zsh_version=$(zsh --version 2>/dev/null | awk '{print $2}') || zsh_version=
+if [ -z "$zsh_version" ]; then
+  echo "WARN: zsh >= 5.9 is required, but zsh was not found" >&2
+  exit 0
+fi
+
+zsh_major=${zsh_version%%.*}
+zsh_minor=${zsh_version#*.}
+zsh_minor=${zsh_minor%%.*}
+
+if [ "$zsh_major" -lt 5 ] || {
+  [ "$zsh_major" -eq 5 ] && [ "$zsh_minor" -lt 9 ]
+}; then
+  echo "WARN: zsh >= 5.9 is required, detected zsh $zsh_version" >&2
+fi
