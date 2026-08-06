@@ -38,10 +38,8 @@ xargs sudo apt install -y -q -o=Dpkg::Use-Pty=0 < "{{ .chezmoi.workingTree }}/se
 {{ else if eq .chezmoi.osRelease.id "debian" }}  
 ## apt
 sudo apt update -q -o=Dpkg::Use-Pty=0
-sudo apt upgrade -y -q -o=Dpkg::Use-Pty=0
 ## Brewfile: {{ include (joinPath .chezmoi.workingTree "setup/debain/pkglist.list") | sha256sum }}
 xargs sudo apt install -y -q -o=Dpkg::Use-Pty=0 < "{{ .chezmoi.workingTree }}/setup/debain/pkglist.list"
 
 {{end}}
-
 

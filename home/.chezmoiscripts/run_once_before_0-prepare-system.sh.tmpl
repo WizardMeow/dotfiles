@@ -37,7 +37,6 @@ xargs sudo apt install -y -q -o=Dpkg::Use-Pty=0 < "{{ .chezmoi.workingTree }}/se
 
 {{ else if eq .chezmoi.osRelease.id "debian" }}  
 sudo apt update -q -o=Dpkg::Use-Pty=0
-sudo apt upgrade -y -q -o=Dpkg::Use-Pty=0
 xargs sudo apt install -y -q -o=Dpkg::Use-Pty=0 < "{{ .chezmoi.workingTree }}/setup/debain/pkglist.build.txt"
 
 {{ end }}

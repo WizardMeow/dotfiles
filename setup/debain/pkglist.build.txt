@@ -3,4 +3,13 @@ git
 git-lfs
 wget
 zsh
-snapd
+build-essential
+libbz2-dev
+libffi-dev
+liblzma-dev
+libreadline-dev
+libsqlite3-dev
+libssl-dev
+tk-dev
+uuid-dev
+zlib1g-dev
