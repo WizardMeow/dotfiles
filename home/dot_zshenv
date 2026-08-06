@@ -1,0 +1,6 @@
+source "$HOME/.zsh/exports.zsh"
+source "$HOME/.zsh/asdf.zsh"
+
+if [[ -f "$HOME/.zshenv.local" ]]; then
+  source "$HOME/.zshenv.local"
+fi
