@@ -15,6 +15,12 @@ export LANGUAGE=zh_CN:en_US
 export ZSH_CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/ohmyzsh"
 mkdir -p "$ZSH_CACHE_DIR/completions"
 
+if [[ "$OSTYPE" == darwin* ]]; then
+    export ZSH_AUTOSUGGEST_USE_ASYNC=1
+else
+    export ZSH_AUTOSUGGEST_USE_ASYNC=0
+fi
+
 # pnpm
 export PNPM_HOME="$HOME/.local/share/pnpm"
 case ":$PATH:" in
